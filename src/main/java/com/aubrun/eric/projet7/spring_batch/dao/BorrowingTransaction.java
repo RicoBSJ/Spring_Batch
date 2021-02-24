@@ -3,6 +3,7 @@ package com.aubrun.eric.projet7.spring_batch.dao;
 import javax.persistence.Id;
 import javax.persistence.Transient;
 import java.time.LocalDate;
+import java.util.Date;
 
 public class BorrowingTransaction {
 
@@ -10,10 +11,10 @@ public class BorrowingTransaction {
     private Integer borrowingId;
     private Book bookBorrowing;
     private UserAccount userAccountBorrowing;
-    private LocalDate beginTransactionDate;
+    private Date beginTransactionDate;
     @Transient
     private String strBeginTransactionDate;
-    private LocalDate endTransactionDate;
+    private Date endTransactionDate;
     @Transient
     private String strEndTransactionDate;
     private Boolean renewal;
@@ -21,7 +22,7 @@ public class BorrowingTransaction {
     public BorrowingTransaction() {
     }
 
-    public BorrowingTransaction(Integer borrowingId, Book bookBorrowing, UserAccount userAccountBorrowing, LocalDate beginTransactionDate, String strBeginTransactionDate, LocalDate endTransactionDate, String strEndTransactionDate, Boolean renewal) {
+    public BorrowingTransaction(Integer borrowingId, Book bookBorrowing, UserAccount userAccountBorrowing, Date beginTransactionDate, String strBeginTransactionDate, Date endTransactionDate, String strEndTransactionDate, Boolean renewal) {
         this.borrowingId = borrowingId;
         this.bookBorrowing = bookBorrowing;
         this.userAccountBorrowing = userAccountBorrowing;
@@ -56,11 +57,11 @@ public class BorrowingTransaction {
         this.userAccountBorrowing = userAccountBorrowing;
     }
 
-    public LocalDate getBeginTransactionDate() {
+    public Date getBeginTransactionDate() {
         return beginTransactionDate;
     }
 
-    public void setBeginTransactionDate(LocalDate beginTransactionDate) {
+    public void setBeginTransactionDate(Date beginTransactionDate) {
         this.beginTransactionDate = beginTransactionDate;
     }
 
@@ -72,11 +73,11 @@ public class BorrowingTransaction {
         this.strBeginTransactionDate = strBeginTransactionDate;
     }
 
-    public LocalDate getEndTransactionDate() {
+    public Date getEndTransactionDate() {
         return endTransactionDate;
     }
 
-    public void setEndTransactionDate(LocalDate endTransactionDate) {
+    public void setEndTransactionDate(Date endTransactionDate) {
         this.endTransactionDate = endTransactionDate;
     }
 

@@ -69,5 +69,6 @@ public class SpringBatchConfig {
         BeanWrapperFieldSetMapper<BorrowingTransaction> fieldSetMapper = new BeanWrapperFieldSetMapper<>();
         fieldSetMapper.setTargetType(BorrowingTransaction.class);
         lineMapper.setFieldSetMapper(fieldSetMapper);
+        return lineMapper;
     }
 }

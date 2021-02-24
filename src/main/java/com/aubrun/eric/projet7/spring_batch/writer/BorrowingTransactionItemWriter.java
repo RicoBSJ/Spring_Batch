@@ -1,7 +1,8 @@
-package com.aubrun.eric.projet7.spring_batch;
+package com.aubrun.eric.projet7.spring_batch.writer;
 
-import com.aubrun.eric.projet7.spring_batch.dao.BorrowingTransaction;
-import com.aubrun.eric.projet7.spring_batch.dao.BorrowingTransactionRepository;
+import com.aubrun.eric.projet7.spring_batch.model.BorrowingTransaction;
+import com.aubrun.eric.projet7.spring_batch.repository.BorrowingTransactionRepository;
+import io.micrometer.core.lang.NonNull;
 import org.springframework.batch.item.ItemWriter;
 import org.springframework.stereotype.Component;
 
@@ -17,7 +18,7 @@ public class BorrowingTransactionItemWriter implements ItemWriter<BorrowingTrans
     }
 
     @Override
-    public void write(List<? extends BorrowingTransaction> list) throws Exception {
+    public void write(@NonNull List<? extends BorrowingTransaction> list) throws Exception {
         borrowingTransactionRepository.saveAll(list);
     }
 }

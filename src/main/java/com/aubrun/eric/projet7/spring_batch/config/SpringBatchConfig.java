@@ -1,6 +1,6 @@
-package com.aubrun.eric.projet7.spring_batch;
+package com.aubrun.eric.projet7.spring_batch.config;
 
-import com.aubrun.eric.projet7.spring_batch.dao.BorrowingTransaction;
+import com.aubrun.eric.projet7.spring_batch.model.BorrowingTransaction;
 import org.springframework.batch.core.Job;
 import org.springframework.batch.core.Step;
 import org.springframework.batch.core.configuration.annotation.EnableBatchProcessing;
@@ -37,7 +37,8 @@ public class SpringBatchConfig {
         this.borrowingTransactionItemProcessor = borrowingTransactionItemProcessor;
     }
 
-    public Job borrowingJob(){
+    @Bean
+    public Job borrowingJob() {
         Step step1 = stepBuilderFactory.get("step-load-data")
                 .<BorrowingTransaction, BorrowingTransaction>chunk(100)
                 .reader(borrowingTransactionItemReader)
@@ -49,7 +50,7 @@ public class SpringBatchConfig {
     }
 
     @Bean
-    public FlatFileItemReader<BorrowingTransaction> flatFileItemReader(@Value("${inputFile}") Resource inputFile){
+    public FlatFileItemReader<BorrowingTransaction> flatFileItemReader(@Value("${inputFile}") Resource inputFile) {
         FlatFileItemReader<BorrowingTransaction> fileItemReader = new FlatFileItemReader<>();
         fileItemReader.setName("FFIR1");
         fileItemReader.setLinesToSkip(1);
@@ -64,7 +65,7 @@ public class SpringBatchConfig {
         DelimitedLineTokenizer lineTokenizer = new DelimitedLineTokenizer();
         lineTokenizer.setDelimiter(",");
         lineTokenizer.setStrict(false);
-        lineTokenizer.setNames("borrowingId","bookBorrowing","userAccountBorrowing","strBeginTransactionDate","strEndTransactionDate","renewal");
+        lineTokenizer.setNames("borrowingId", "bookBorrowing", "userAccountBorrowing", "strBeginTransactionDate", "strEndTransactionDate", "renewal");
         lineMapper.setLineTokenizer(lineTokenizer);
         BeanWrapperFieldSetMapper<BorrowingTransaction> fieldSetMapper = new BeanWrapperFieldSetMapper<>();
         fieldSetMapper.setTargetType(BorrowingTransaction.class);

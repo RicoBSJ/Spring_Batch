@@ -1,9 +1,8 @@
-package com.aubrun.eric.projet7.spring_batch.dao;
+package com.aubrun.eric.projet7.spring_batch.model;
 
 import javax.persistence.Id;
 import javax.persistence.Transient;
 import java.time.LocalDate;
-import java.util.Date;
 
 public class BorrowingTransaction {
 
@@ -11,10 +10,7 @@ public class BorrowingTransaction {
     private Integer borrowingId;
     private Book bookBorrowing;
     private UserAccount userAccountBorrowing;
-    private Date beginTransactionDate;
-    @Transient
-    private String strBeginTransactionDate;
-    private Date endTransactionDate;
+    private LocalDate endTransactionDate;
     @Transient
     private String strEndTransactionDate;
     private Boolean renewal;
@@ -22,12 +18,10 @@ public class BorrowingTransaction {
     public BorrowingTransaction() {
     }
 
-    public BorrowingTransaction(Integer borrowingId, Book bookBorrowing, UserAccount userAccountBorrowing, Date beginTransactionDate, String strBeginTransactionDate, Date endTransactionDate, String strEndTransactionDate, Boolean renewal) {
+    public BorrowingTransaction(Integer borrowingId, Book bookBorrowing, UserAccount userAccountBorrowing, LocalDate endTransactionDate, String strEndTransactionDate, Boolean renewal) {
         this.borrowingId = borrowingId;
         this.bookBorrowing = bookBorrowing;
         this.userAccountBorrowing = userAccountBorrowing;
-        this.beginTransactionDate = beginTransactionDate;
-        this.strBeginTransactionDate = strBeginTransactionDate;
         this.endTransactionDate = endTransactionDate;
         this.strEndTransactionDate = strEndTransactionDate;
         this.renewal = renewal;
@@ -57,27 +51,11 @@ public class BorrowingTransaction {
         this.userAccountBorrowing = userAccountBorrowing;
     }
 
-    public Date getBeginTransactionDate() {
-        return beginTransactionDate;
-    }
-
-    public void setBeginTransactionDate(Date beginTransactionDate) {
-        this.beginTransactionDate = beginTransactionDate;
-    }
-
-    public String getStrBeginTransactionDate() {
-        return strBeginTransactionDate;
-    }
-
-    public void setStrBeginTransactionDate(String strBeginTransactionDate) {
-        this.strBeginTransactionDate = strBeginTransactionDate;
-    }
-
-    public Date getEndTransactionDate() {
+    public LocalDate getEndTransactionDate() {
         return endTransactionDate;
     }
 
-    public void setEndTransactionDate(Date endTransactionDate) {
+    public void setEndTransactionDate(LocalDate endTransactionDate) {
         this.endTransactionDate = endTransactionDate;
     }
 
@@ -103,8 +81,6 @@ public class BorrowingTransaction {
                 "borrowingId=" + borrowingId +
                 ", bookBorrowing=" + bookBorrowing +
                 ", userAccountBorrowing=" + userAccountBorrowing +
-                ", beginTransactionDate=" + beginTransactionDate +
-                ", strBeginTransactionDate='" + strBeginTransactionDate + '\'' +
                 ", endTransactionDate=" + endTransactionDate +
                 ", strEndTransactionDate='" + strEndTransactionDate + '\'' +
                 ", renewal=" + renewal +

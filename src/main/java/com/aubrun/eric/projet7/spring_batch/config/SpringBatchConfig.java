@@ -6,6 +6,7 @@ import org.springframework.batch.core.Step;
 import org.springframework.batch.core.configuration.annotation.EnableBatchProcessing;
 import org.springframework.batch.core.configuration.annotation.JobBuilderFactory;
 import org.springframework.batch.core.configuration.annotation.StepBuilderFactory;
+import org.springframework.batch.core.configuration.annotation.StepScope;
 import org.springframework.batch.item.ItemProcessor;
 import org.springframework.batch.item.ItemReader;
 import org.springframework.batch.item.ItemWriter;
@@ -14,6 +15,7 @@ import org.springframework.batch.item.file.LineMapper;
 import org.springframework.batch.item.file.mapping.BeanWrapperFieldSetMapper;
 import org.springframework.batch.item.file.mapping.DefaultLineMapper;
 import org.springframework.batch.item.file.transform.DelimitedLineTokenizer;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -23,19 +25,11 @@ import org.springframework.core.io.Resource;
 @EnableBatchProcessing
 public class SpringBatchConfig {
 
-    private final JobBuilderFactory jobBuilderFactory;
-    private final StepBuilderFactory stepBuilderFactory;
-    private final ItemReader<BorrowingTransaction> borrowingTransactionItemReader;
-    private final ItemWriter<BorrowingTransaction> borrowingTransactionItemWriter;
-    private final ItemProcessor<BorrowingTransaction, BorrowingTransaction> borrowingTransactionItemProcessor;
-
-    public SpringBatchConfig(JobBuilderFactory jobBuilderFactory, StepBuilderFactory stepBuilderFactory, ItemReader<BorrowingTransaction> borrowingTransactionItemReader, ItemWriter<BorrowingTransaction> borrowingTransactionItemWriter, ItemProcessor<BorrowingTransaction, BorrowingTransaction> borrowingTransactionItemProcessor) {
-        this.jobBuilderFactory = jobBuilderFactory;
-        this.stepBuilderFactory = stepBuilderFactory;
-        this.borrowingTransactionItemReader = borrowingTransactionItemReader;
-        this.borrowingTransactionItemWriter = borrowingTransactionItemWriter;
-        this.borrowingTransactionItemProcessor = borrowingTransactionItemProcessor;
-    }
+    @Autowired private JobBuilderFactory jobBuilderFactory;
+    @Autowired private StepBuilderFactory stepBuilderFactory;
+    @Autowired private ItemReader<BorrowingTransaction> borrowingTransactionItemReader;
+    @Autowired private ItemWriter<BorrowingTransaction> borrowingTransactionItemWriter;
+    @Autowired private ItemProcessor<BorrowingTransaction, BorrowingTransaction> borrowingTransactionItemProcessor;
 
     @Bean
     public Job borrowingJob() {
@@ -50,6 +44,7 @@ public class SpringBatchConfig {
     }
 
     @Bean
+    @StepScope
     public FlatFileItemReader<BorrowingTransaction> flatFileItemReader(@Value("${inputFile}") Resource inputFile) {
         FlatFileItemReader<BorrowingTransaction> fileItemReader = new FlatFileItemReader<>();
         fileItemReader.setName("FFIR1");
@@ -65,7 +60,7 @@ public class SpringBatchConfig {
         DelimitedLineTokenizer lineTokenizer = new DelimitedLineTokenizer();
         lineTokenizer.setDelimiter(",");
         lineTokenizer.setStrict(false);
-        lineTokenizer.setNames("borrowingId", "bookBorrowing", "userAccountBorrowing", "strEndTransactionDate", "renewal");
+        lineTokenizer.setNames("borrowingId","bookBorrowing","userAccountBorrowing","strEndTransactionDate","renewal");
         lineMapper.setLineTokenizer(lineTokenizer);
         BeanWrapperFieldSetMapper<BorrowingTransaction> fieldSetMapper = new BeanWrapperFieldSetMapper<>();
         fieldSetMapper.setTargetType(BorrowingTransaction.class);

@@ -1,14 +1,16 @@
 package com.aubrun.eric.projet7.spring_batch.model;
 
-import javax.persistence.Id;
-import javax.persistence.Transient;
+import javax.persistence.*;
 import java.time.LocalDate;
 
+@Entity
 public class BorrowingTransaction {
 
     @Id
     private Integer borrowingId;
+    @ManyToOne
     private Book bookBorrowing;
+    @ManyToOne
     private UserAccount userAccountBorrowing;
     private LocalDate endTransactionDate;
     @Transient

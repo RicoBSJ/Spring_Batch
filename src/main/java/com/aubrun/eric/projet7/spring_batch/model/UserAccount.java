@@ -1,7 +1,12 @@
 package com.aubrun.eric.projet7.spring_batch.model;
 
+import javax.persistence.Entity;
+import javax.persistence.Id;
+
+@Entity
 public class UserAccount {
 
+    @Id
     private Integer userId;
     private String username;
     private String email;

@@ -7,6 +7,16 @@ public class Book {
     private Integer quantity;
     private String yearBook;
 
+    public Book() {
+    }
+
+    public Book(Integer bookId, String title, Integer quantity, String yearBook) {
+        this.bookId = bookId;
+        this.title = title;
+        this.quantity = quantity;
+        this.yearBook = yearBook;
+    }
+
     public Integer getBookId() {
         return bookId;
     }
@@ -37,5 +47,15 @@ public class Book {
 
     public void setYearBook(String yearBook) {
         this.yearBook = yearBook;
+    }
+
+    @Override
+    public String toString() {
+        return "Book{" +
+                "bookId=" + bookId +
+                ", title='" + title + '\'' +
+                ", quantity=" + quantity +
+                ", yearBook='" + yearBook + '\'' +
+                '}';
     }
 }

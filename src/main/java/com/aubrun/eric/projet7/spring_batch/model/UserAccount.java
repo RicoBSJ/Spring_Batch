@@ -1,11 +1,16 @@
 package com.aubrun.eric.projet7.spring_batch.model;
 
+import java.util.List;
+
 public class UserAccount {
 
     private Integer userId;
     private String username;
     private String email;
-    private String password;
+    private List<BorrowingTransaction> borrowingList;
+
+    public UserAccount() {
+    }
 
     public Integer getUserId() {
         return userId;
@@ -31,11 +36,21 @@ public class UserAccount {
         this.email = email;
     }
 
-    public String getPassword() {
-        return password;
+    public List<BorrowingTransaction> getBorrowingList() {
+        return borrowingList;
     }
 
-    public void setPassword(String password) {
-        this.password = password;
+    public void setBorrowingList(List<BorrowingTransaction> borrowingList) {
+        this.borrowingList = borrowingList;
+    }
+
+    @Override
+    public String toString() {
+        return "UserAccount{" +
+                "userId=" + userId +
+                ", username='" + username + '\'' +
+                ", email='" + email + '\'' +
+                ", borrowingList=" + borrowingList +
+                '}';
     }
 }

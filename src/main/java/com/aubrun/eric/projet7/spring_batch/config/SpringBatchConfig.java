@@ -10,17 +10,14 @@ import org.springframework.batch.core.configuration.annotation.StepBuilderFactor
 import org.springframework.batch.item.ItemProcessor;
 import org.springframework.batch.item.ItemReader;
 import org.springframework.batch.item.ItemWriter;
-import org.springframework.batch.item.file.FlatFileItemReader;
 import org.springframework.batch.item.file.LineMapper;
 import org.springframework.batch.item.file.mapping.BeanWrapperFieldSetMapper;
 import org.springframework.batch.item.file.mapping.DefaultLineMapper;
 import org.springframework.batch.item.file.transform.DelimitedLineTokenizer;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.env.Environment;
-import org.springframework.core.io.Resource;
 import org.springframework.web.client.RestTemplate;
 
 @Configuration
@@ -50,20 +47,10 @@ public class SpringBatchConfig {
                 .start(step1).build();
     }
 
-    /*@Bean
-    public FlatFileItemReader<BorrowingTransaction> flatFileItemReader(@Value("${inputFile}") Resource inputFile) {
-        FlatFileItemReader<BorrowingTransaction> fileItemReader = new FlatFileItemReader<>();
-        fileItemReader.setName("FFIR1");
-        fileItemReader.setLinesToSkip(1);
-        fileItemReader.setResource(inputFile);
-        fileItemReader.setLineMapper(lineMappe());
-        return fileItemReader;
-    }*/
-
     @Bean
     public ItemReader<BorrowingTransaction> itemReader(Environment environment,
                                                        RestTemplate restTemplate) {
-        return new RestBorrowingTransactionReader(environment.getRequiredProperty("rest.api.url"),
+        return new RestBorrowingTransactionReader(environment.getRequiredProperty("http://localhost:8081/biblio-api/borrowings/lateDate"),
                 restTemplate
         );
     }

@@ -10,7 +10,7 @@ import java.util.List;
 
 public class RestBorrowingTransactionReader implements ItemReader<BorrowingTransaction> {
 
-    private final String apiUrl;
+    private String apiUrl;
     private final RestTemplate restTemplate;
 
     private int nextBorrowingIndex;
@@ -45,6 +45,7 @@ public class RestBorrowingTransactionReader implements ItemReader<BorrowingTrans
     }
 
     private List<BorrowingTransaction> fetchBorrowingTransactionListFromAPI() {
+        apiUrl = "http://localhost:8081/biblio-api/borrowings/lateDate";
         ResponseEntity<BorrowingTransaction[]> response = restTemplate.getForEntity(apiUrl,
                 BorrowingTransaction[].class
         );

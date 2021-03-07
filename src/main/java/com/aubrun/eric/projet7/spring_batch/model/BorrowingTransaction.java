@@ -13,6 +13,9 @@ public class BorrowingTransaction {
     private String strEndTransactionDate;
     private Boolean renewal;
 
+    public BorrowingTransaction() {
+    }
+
     public Integer getBorrowingId() {
         return borrowingId;
     }
@@ -59,5 +62,17 @@ public class BorrowingTransaction {
 
     public void setRenewal(Boolean renewal) {
         this.renewal = renewal;
+    }
+
+    @Override
+    public String toString() {
+        return "BorrowingTransaction{" +
+                "borrowingId=" + borrowingId +
+                ", bookBorrowing=" + bookBorrowing +
+                ", userAccountBorrowing=" + userAccountBorrowing +
+                ", endTransactionDate=" + endTransactionDate +
+                ", strEndTransactionDate='" + strEndTransactionDate + '\'' +
+                ", renewal=" + renewal +
+                '}';
     }
 }

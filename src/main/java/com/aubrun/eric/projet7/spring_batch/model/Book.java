@@ -7,6 +7,10 @@ public class Book {
     private String title;
     private Integer quantity;
     private String yearBook;
+    private Author bookAuthor;
+
+    public Book() {
+    }
 
     public Integer getBookId() {
         return bookId;
@@ -38,5 +42,24 @@ public class Book {
 
     public void setYearBook(String yearBook) {
         this.yearBook = yearBook;
+    }
+
+    public Author getBookAuthor() {
+        return bookAuthor;
+    }
+
+    public void setBookAuthor(Author bookAuthor) {
+        this.bookAuthor = bookAuthor;
+    }
+
+    @Override
+    public String toString() {
+        return "Book{" +
+                "bookId=" + bookId +
+                ", title='" + title + '\'' +
+                ", quantity=" + quantity +
+                ", yearBook='" + yearBook + '\'' +
+                ", bookAuthor=" + bookAuthor +
+                '}';
     }
 }

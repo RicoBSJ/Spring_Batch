@@ -10,7 +10,7 @@ import java.util.List;
 
 public class RestBorrowingTransactionReader implements ItemReader<BorrowingTransaction> {
 
-    private String apiUrl;
+    private final String apiUrl;
     private final RestTemplate restTemplate;
 
     private int nextBorrowingIndex;
@@ -24,20 +24,22 @@ public class RestBorrowingTransactionReader implements ItemReader<BorrowingTrans
 
     @Override
     public BorrowingTransaction read() throws Exception {
+
         if (borrowingTransactionListIsNotInitialized()) {
             borrowingTransactionList = fetchBorrowingTransactionListFromAPI();
         }
 
-        BorrowingTransaction nextBorrowing = null;
+        BorrowingTransaction nextStudent = null;
 
         if (nextBorrowingIndex < borrowingTransactionList.size()) {
-            nextBorrowing = borrowingTransactionList.get(nextBorrowingIndex);
+            nextStudent = borrowingTransactionList.get(nextBorrowingIndex);
             nextBorrowingIndex++;
-        } else {
+        }
+        else {
             nextBorrowingIndex = 0;
             borrowingTransactionList = null;
         }
-        return nextBorrowing;
+        return nextStudent;
     }
 
     private boolean borrowingTransactionListIsNotInitialized() {
@@ -45,11 +47,10 @@ public class RestBorrowingTransactionReader implements ItemReader<BorrowingTrans
     }
 
     private List<BorrowingTransaction> fetchBorrowingTransactionListFromAPI() {
-        apiUrl = "http://localhost:8081/biblio-api/borrowings/lateDate";
-        ResponseEntity<BorrowingTransaction[]> response = restTemplate.getForEntity(apiUrl,
-                BorrowingTransaction[].class
-        );
+
+        ResponseEntity<BorrowingTransaction[]> response = restTemplate.getForEntity(apiUrl, BorrowingTransaction[].class);
         BorrowingTransaction[] borrowingTransactionList = response.getBody();
+
         return Arrays.asList(borrowingTransactionList);
     }
 }

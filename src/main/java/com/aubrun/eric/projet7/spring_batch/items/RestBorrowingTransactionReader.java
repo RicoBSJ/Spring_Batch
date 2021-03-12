@@ -1,4 +1,4 @@
-package com.aubrun.eric.projet7.spring_batch.reader;
+package com.aubrun.eric.projet7.spring_batch.items;
 
 import com.aubrun.eric.projet7.spring_batch.model.BorrowingTransaction;
 import org.springframework.batch.item.ItemReader;
@@ -29,17 +29,17 @@ public class RestBorrowingTransactionReader implements ItemReader<BorrowingTrans
             borrowingTransactionList = fetchBorrowingTransactionListFromAPI();
         }
 
-        BorrowingTransaction nextStudent = null;
+        BorrowingTransaction nextBorrowing = null;
 
         if (nextBorrowingIndex < borrowingTransactionList.size()) {
-            nextStudent = borrowingTransactionList.get(nextBorrowingIndex);
+            nextBorrowing = borrowingTransactionList.get(nextBorrowingIndex);
             nextBorrowingIndex++;
         }
         else {
             nextBorrowingIndex = 0;
             borrowingTransactionList = null;
         }
-        return nextStudent;
+        return nextBorrowing;
     }
 
     private boolean borrowingTransactionListIsNotInitialized() {

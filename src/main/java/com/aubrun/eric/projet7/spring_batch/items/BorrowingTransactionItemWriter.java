@@ -1,4 +1,4 @@
-package com.aubrun.eric.projet7.spring_batch.writer;
+package com.aubrun.eric.projet7.spring_batch.items;
 
 import com.aubrun.eric.projet7.spring_batch.model.BorrowingTransaction;
 import com.aubrun.eric.projet7.spring_batch.repository.BorrowingTransactionRepository;

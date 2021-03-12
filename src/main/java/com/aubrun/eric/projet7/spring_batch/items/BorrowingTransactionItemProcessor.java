@@ -1,4 +1,4 @@
-package com.aubrun.eric.projet7.spring_batch.processor;
+package com.aubrun.eric.projet7.spring_batch.items;
 
 import com.aubrun.eric.projet7.spring_batch.model.BorrowingTransaction;
 import org.springframework.batch.item.ItemProcessor;

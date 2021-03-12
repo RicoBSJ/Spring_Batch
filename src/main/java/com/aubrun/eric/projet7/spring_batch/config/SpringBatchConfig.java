@@ -1,7 +1,6 @@
 package com.aubrun.eric.projet7.spring_batch.config;
 
-import com.aubrun.eric.projet7.spring_batch.model.BorrowingTransaction;
-import com.aubrun.eric.projet7.spring_batch.items.RestBorrowingTransactionReader;
+import com.aubrun.eric.projet7.spring_batch.model.BatchDto;
 import org.springframework.batch.core.Job;
 import org.springframework.batch.core.Step;
 import org.springframework.batch.core.configuration.annotation.EnableBatchProcessing;
@@ -10,15 +9,9 @@ import org.springframework.batch.core.configuration.annotation.StepBuilderFactor
 import org.springframework.batch.item.ItemProcessor;
 import org.springframework.batch.item.ItemReader;
 import org.springframework.batch.item.ItemWriter;
-import org.springframework.batch.item.file.LineMapper;
-import org.springframework.batch.item.file.mapping.BeanWrapperFieldSetMapper;
-import org.springframework.batch.item.file.mapping.DefaultLineMapper;
-import org.springframework.batch.item.file.transform.DelimitedLineTokenizer;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.core.env.Environment;
-import org.springframework.web.client.RestTemplate;
 
 @Configuration
 @EnableBatchProcessing
@@ -29,29 +22,21 @@ public class SpringBatchConfig {
     @Autowired
     private StepBuilderFactory stepBuilderFactory;
     @Autowired
-    private ItemReader<BorrowingTransaction> borrowingTransactionItemReader;
+    private ItemReader<BatchDto> batchDtoItemReader;
     @Autowired
-    private ItemWriter<BorrowingTransaction> borrowingTransactionItemWriter;
+    private ItemWriter<BatchDto> batchDtoItemWriter;
     @Autowired
-    private ItemProcessor<BorrowingTransaction, BorrowingTransaction> borrowingTransactionItemProcessor;
+    private ItemProcessor<BatchDto, BatchDto> batchDtoItemProcessor;
 
     @Bean
     public Job borrowingJob() {
         Step step = stepBuilderFactory.get("step-load-data")
-                .<BorrowingTransaction, BorrowingTransaction>chunk(10)
-                .reader(borrowingTransactionItemReader)
-                .processor(borrowingTransactionItemProcessor)
-                .writer(borrowingTransactionItemWriter)
+                .<BatchDto, BatchDto>chunk(10)
+                .reader(batchDtoItemReader)
+                .processor(batchDtoItemProcessor)
+                .writer(batchDtoItemWriter)
                 .build();
         return jobBuilderFactory.get("borrowing-data-loader-job")
                 .start(step).build();
-    }
-
-    @Bean
-    public ItemReader<BorrowingTransaction> itemReader(Environment environment,
-                                                       RestTemplate restTemplate) {
-        return new RestBorrowingTransactionReader(environment.getRequiredProperty("rest.api.url"),
-                restTemplate
-        );
     }
 }

@@ -1,16 +1,14 @@
 package com.aubrun.eric.projet7.spring_batch.model;
 
-
-public class Book {
+public class BookDto {
 
     private Integer bookId;
     private String title;
     private Integer quantity;
     private String yearBook;
-    private Author bookAuthor;
-
-    public Book() {
-    }
+    private AuthorDto bookAuthor;
+    private CategoryDto bookCategory;
+    private EditionDto bookEdition;
 
     public Integer getBookId() {
         return bookId;
@@ -44,22 +42,27 @@ public class Book {
         this.yearBook = yearBook;
     }
 
-    public Author getBookAuthor() {
+    public AuthorDto getBookAuthor() {
         return bookAuthor;
     }
 
-    public void setBookAuthor(Author bookAuthor) {
+    public void setBookAuthor(AuthorDto bookAuthor) {
         this.bookAuthor = bookAuthor;
     }
 
-    @Override
-    public String toString() {
-        return "Book{" +
-                "bookId=" + bookId +
-                ", title='" + title + '\'' +
-                ", quantity=" + quantity +
-                ", yearBook='" + yearBook + '\'' +
-                ", bookAuthor=" + bookAuthor +
-                '}';
+    public CategoryDto getBookCategory() {
+        return bookCategory;
+    }
+
+    public void setBookCategory(CategoryDto bookCategory) {
+        this.bookCategory = bookCategory;
+    }
+
+    public EditionDto getBookEdition() {
+        return bookEdition;
+    }
+
+    public void setBookEdition(EditionDto bookEdition) {
+        this.bookEdition = bookEdition;
     }
 }

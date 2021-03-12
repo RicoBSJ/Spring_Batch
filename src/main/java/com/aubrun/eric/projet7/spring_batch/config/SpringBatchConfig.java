@@ -38,7 +38,7 @@ public class SpringBatchConfig {
     @Bean
     public Job borrowingJob() {
         Step step = stepBuilderFactory.get("step-load-data")
-                .<BorrowingTransaction, BorrowingTransaction>chunk(100)
+                .<BorrowingTransaction, BorrowingTransaction>chunk(10)
                 .reader(borrowingTransactionItemReader)
                 .processor(borrowingTransactionItemProcessor)
                 .writer(borrowingTransactionItemWriter)

@@ -7,6 +7,7 @@ import org.springframework.batch.item.ItemWriter;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
+import java.util.Locale;
 
 @Component
 public class BorrowingTransactionItemWriter implements ItemWriter<BorrowingTransaction> {
@@ -20,5 +21,6 @@ public class BorrowingTransactionItemWriter implements ItemWriter<BorrowingTrans
     @Override
     public void write(@NonNull List<? extends BorrowingTransaction> list) throws Exception {
         borrowingTransactionRepository.saveAll(list);
+        /*borrowingTransactionRepository.findBorrowingTransactionByEndTransactionDateAndUserAccountBorrowing(String formattedString);*/
     }
 }

@@ -13,7 +13,7 @@ public class BorrowingTransactionItemProcessor implements ItemProcessor<Borrowin
     /*private final LocalDate localDate = LocalDate.of(Integer.parseInt("yyyy"),Integer.parseInt("mm"),Integer.parseInt("dd"));*/
     LocalDate localDate = LocalDate.now();
     DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy/MM/dd");
-    String formattedString = localDate.format(formatter);
+    public String formattedString = localDate.format(formatter);
 
     @Override
     public BorrowingTransaction process(BorrowingTransaction borrowingTransaction) throws Exception {

@@ -3,7 +3,6 @@ package com.aubrun.eric.projet7.spring_batch.config;
 import com.aubrun.eric.projet7.spring_batch.model.BatchDto;
 import org.springframework.batch.core.Job;
 import org.springframework.batch.core.Step;
-import org.springframework.batch.core.configuration.annotation.EnableBatchProcessing;
 import org.springframework.batch.core.configuration.annotation.JobBuilderFactory;
 import org.springframework.batch.core.configuration.annotation.StepBuilderFactory;
 import org.springframework.batch.item.ItemProcessor;
@@ -14,7 +13,6 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 @Configuration
-@EnableBatchProcessing
 public class SpringBatchConfig {
 
     @Autowired

@@ -8,9 +8,6 @@ import org.springframework.batch.core.repository.JobRestartException;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.util.HashMap;
-import java.util.Map;
-
 @RestController
 public class JobRestController {
 
@@ -23,14 +20,11 @@ public class JobRestController {
     }
 
     @GetMapping("/startJob")
-    public BatchStatus load() throws JobParametersInvalidException, JobExecutionAlreadyRunningException, JobRestartException, JobInstanceAlreadyCompleteException {
-        Map<String, JobParameter> params = new HashMap<>();
-        params.put("time", new JobParameter(System.currentTimeMillis()));
-        JobParameters jobParameters = new JobParameters(params);
-        JobExecution jobExecution = jobLauncher.run(job, jobParameters);
-        while (jobExecution.isRunning()){
-            System.out.println("......");
-        }
-        return jobExecution.getStatus();
+    public String handle() throws JobParametersInvalidException, JobExecutionAlreadyRunningException, JobRestartException, JobInstanceAlreadyCompleteException {
+
+        JobParameters jobParameters = new JobParametersBuilder().addLong("time", System.currentTimeMillis()).toJobParameters();
+        jobLauncher.run(job, jobParameters);
+
+        return "Batch job has been invoked";
     }
 }

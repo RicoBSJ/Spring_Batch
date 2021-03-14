@@ -32,10 +32,11 @@ public class BatchDtoItemWriter implements ItemWriter<BatchDto> {
         restTemplate.exchange("http://localhost:8081/biblio-api/borrowings/lateDate", HttpMethod.GET, entity, BatchDto.class);
 
         /*final List<BatchDto> batchDtoList = lists*/
-        for (BatchDto list : lists) {
+        lists.forEach(list ->{
+        /*for (BatchDto list : lists) {*/
 
             restTemplate.postForEntity("http://localhost:8081/biblio-api/borrowings/sendMail", list, BatchDto.class);
-        }
+        });
 
         //boucler sur la liste de batchDto
 

@@ -30,10 +30,10 @@ public class BatchDtoItemWriter implements ItemWriter<BatchDto> {
         HttpHeaders headers = new HttpHeaders();
         headers.set("Authorization", jwtToken.getJwt());
         HttpEntity<HttpHeaders> entity = new HttpEntity<>(headers);
-        ResponseEntity<BatchDto> batchDtoResponseEntity = restTemplate.exchange("http://localhost:8081/biblio-api/borrowings/lateDate", HttpMethod.GET, entity, BatchDto.class);
+        restTemplate.exchange("http://localhost:8081/biblio-api/borrowings/lateDate", HttpMethod.GET, entity, BatchDto.class);
 
         for (BatchDto list : lists) {
-            batchDtoResponseEntity = restTemplate.postForEntity("http://localhost:8081/biblio-api/sendMail", list, BatchDto.class);
+            restTemplate.postForEntity("http://localhost:8081/biblio-api/sendMail", list, BatchDto.class);
         }
     }
 }

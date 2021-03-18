@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Component;
 import org.springframework.web.client.RestTemplate;
 
@@ -29,16 +30,10 @@ public class BatchDtoItemWriter implements ItemWriter<BatchDto> {
         HttpHeaders headers = new HttpHeaders();
         headers.set("Authorization", jwtToken.getJwt());
         HttpEntity<HttpHeaders> entity = new HttpEntity<>(headers);
-        restTemplate.exchange("http://localhost:8081/biblio-api/borrowings/lateDate", HttpMethod.GET, entity, BatchDto.class);
+        ResponseEntity<BatchDto> batchDtoResponseEntity = restTemplate.exchange("http://localhost:8081/biblio-api/borrowings/lateDate", HttpMethod.GET, entity, BatchDto.class);
 
-        /*final List<BatchDto> batchDtoList = lists*/
-        /*for (BatchDto list : lists) {*/
         for (BatchDto list : lists) {
-            restTemplate.postForEntity("http://localhost:8081/biblio-api/sendMail", list, BatchDto.class);
+            batchDtoResponseEntity = restTemplate.postForEntity("http://localhost:8081/biblio-api/sendMail", list, BatchDto.class);
         }
-
-        //boucler sur la liste de batchDto
-
-        //pour chaque élément appeler le endpoint qui envoie le mail
     }
 }

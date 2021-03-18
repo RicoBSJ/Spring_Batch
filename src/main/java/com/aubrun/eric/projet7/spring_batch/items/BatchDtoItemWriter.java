@@ -34,7 +34,7 @@ public class BatchDtoItemWriter implements ItemWriter<BatchDto> {
         /*final List<BatchDto> batchDtoList = lists*/
         /*for (BatchDto list : lists) {*/
         for (BatchDto list : lists) {
-            restTemplate.postForEntity("http://localhost:8081/biblio-api/borrowings/sendMail", list, BatchDto.class);
+            restTemplate.postForEntity("http://localhost:8081/biblio-api/sendMail", list, BatchDto.class);
         }
 
         //boucler sur la liste de batchDto

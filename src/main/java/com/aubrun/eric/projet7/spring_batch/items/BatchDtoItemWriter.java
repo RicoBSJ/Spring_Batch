@@ -8,7 +8,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Component;
 import org.springframework.web.client.RestTemplate;
 
@@ -25,15 +24,13 @@ public class BatchDtoItemWriter implements ItemWriter<BatchDto> {
     private JwtToken jwtToken;
 
     @Override
-    public void write(@NonNull List<? extends BatchDto> lists) throws Exception {
+    public void write(@NonNull List<? extends BatchDto> batchDtos) throws Exception {
 
-        HttpHeaders headers = new HttpHeaders();
-        headers.set("Authorization", jwtToken.getJwt());
-        HttpEntity<HttpHeaders> entity = new HttpEntity<>(headers);
-        restTemplate.exchange("http://localhost:8081/biblio-api/borrowings/lateDate", HttpMethod.GET, entity, BatchDto.class);
-
-        for (BatchDto list : lists) {
-            restTemplate.postForEntity("http://localhost:8081/biblio-api/sendMail", list, BatchDto.class);
+        for (BatchDto batchDto : batchDtos) {
+            HttpHeaders headers = new HttpHeaders();
+            headers.set("Authorization", jwtToken.getJwt());
+            HttpEntity<Object> entity = new HttpEntity<>(batchDto, headers);
+            restTemplate.exchange("http://localhost:8081/biblio-api/sendMail", HttpMethod.POST, entity, Void.class);
         }
     }
 }

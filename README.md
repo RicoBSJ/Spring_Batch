@@ -1,4 +1,5 @@
 # Développez le nouveau Système d’Information de la bibliothèque d’une grande ville, Projet 7, dans le cadre de la formation DA JAVA JEE OPENCLASSROOMS
+# Projet portant sur la partie BATCH du Projet 7
 
 ## Contexte
 

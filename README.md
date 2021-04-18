@@ -1,6 +1,6 @@
 # Développez le nouveau Système d’Information de la bibliothèque d’une grande ville, Projet 7, dans le cadre de la formation DA JAVA JEE OPENCLASSROOMS
 # Le Projet 7 a été scindé en 3 sous-projets
-# Ce sous-projet représente le front-end de l'application, développé à partir de Spring MVC
+# Ce sous-projet représente le batch de l'application, développé à partir de Spring Batch
 
 ## Contexte
 
@@ -54,29 +54,35 @@ Les outils utilisés pour le développement
 	- Java 8 (version 1.8 Update 251)
 	- Hibernate ORM (version hibernate-release-6.1.6.Final)
 	- Spring Boot version 2.4.2 (Tomcat version 9.0.43 embarqué)
-	- Spring Security version 2.4.2
-	- Spring MVC version 5.3.4
-	- Bootstrap version 4.4.1
+	- Spring Batch 4.3.1
 
 Les étapes de déploiement de l'application
 
-	1/Vous devez au-préalable télécharger et installer :
+	1/Vous devez au-préalable télécharger et installer si ça n'est pas déjà fait :
 	
 	- Java sur https://www.java.com/fr/download/
 	- Le JDK sur https://www.oracle.com/fr/java/technologies/javase/javase-jdk8-downloads.html
 	- Apache Maven sur https://maven.apache.org/download.cgi (n'oubliez pas d'ajouter la variable d'environnement d'Apache au "Path")
-	- Hibernate sur https://sourceforge.net/projects/hibernate/files/hibernate-validator/6.1.6.Final/hibernate-validator-6.1.6.Final-dist.zip/download
+
+	2/Si vous ne l'avez pas déjà effectué, vous devez lancer pgAdmin4 :
 	
-	3/A partir de votre IDE, veuillez cloner le front-end à l'adresse suivante :
+	- Voici le chemin : /Library/PostgreSQL/12/
+	- Dans la base de données, créez un utilisateur "postgres", attribuez lui le mot de passe "postgres"
+	- Nul besoin de lancer un script de création de base de données car Hibernate se charge de le faire. 
+	Ceci étant, vous trouverez un dump dans " PBiblio_Api_03_Script_SQL_Creation_Base_De_Donnees.sql " que vous trouverez dans le package
+	- Pareillement pour le jeu de données, nul besoin d'exécuter le script car l'API contient un fichier " data.sql " se chargeant 
+	de l'opération à son lancement. Ceci étant, vous trouverez ce fichier "PBiblio_Api_04_Script_SQL_Jeu_De_Donnees.sql"
 	
-	- https://github.com/RicoBSJ/Spring_MVC_V2.git
+	3/A partir de votre IDE, veuillez cloner le batch à l'adresse suivante :
+	
+	- https://github.com/RicoBSJ/Spring_Batch.git
 
 Le lancement de l'application
 
-	- A partir du Main situé dans la couche library-exposition, dans le package com.aubrun.eric.projet7, positionnez votre curseur devant " public class Main ", 
+	- Veillez à ce que l'API Rest soit démarrée
+	- A partir du Main situé dans le package package com.aubrun.eric.projet7.spring_batch, positionnez votre curseur devant " public class SpringBatchApplication ", 
 	déclenchez l'ouverture du menu et cliquez sur " Run 'Main' "
-	- L'API démarrée, vous devez à présent cloner le sous-projet représentant le batch-end de l'application à l'adresse suivante : https://github.com/RicoBSJ/Spring_Batch.git
-	- Ouvrez votre navigateur Internet et tapez "http://localhost:8080/library_exposition_war_exploded/" pour lancer l'application
+	- L'application démarre
 
 ## Auteur
 
